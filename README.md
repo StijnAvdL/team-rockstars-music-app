@@ -1,4 +1,4 @@
-# MS sherpa
+# Janssen demo app
 
 ### Install
 

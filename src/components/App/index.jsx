@@ -3,7 +3,7 @@ import { Component } from "react";
 import { observer } from "mobx-react";
 // import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 // import theme from "/src/configs/theme";
-import Router from "/src/Router";
+import Router from "/src/components/Router";
 import RouterModel from "/src/models/Router";
 
 @observer

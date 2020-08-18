@@ -2,6 +2,8 @@ import { Component } from "react";
 import PropTypes from "prop-types";
 import { observer } from "mobx-react";
 
+import { AppBar } from "@orikami-nl/orikami-components";
+
 import HomeScreen from "/src/viewmodels/HomeScreen";
 // import Menu from "/src/components/Menu";
 // import menuToggle from "/src/services/menuToggle";
@@ -22,12 +24,15 @@ export class RouterView extends Component {
     } = this.props;
     // var menuHidden = false;
 
+    var content = null;
+    var appBar = <AppBar leftType="menu" title="Janssen" />;
+
     switch (page) {
       case "/":
         content = (
           <HomeScreen
             go={go}
-            timelineModel={timelineModel}
+            // timelineModel={timelineModel}
           />
         );
         break;
@@ -35,6 +40,7 @@ export class RouterView extends Component {
 
     return (
       <div>
+        {appBar}
         {content}
         {/* {menuHidden ? null : (
           <Menu
