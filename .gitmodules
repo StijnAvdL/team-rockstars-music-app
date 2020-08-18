@@ -1,0 +1,3 @@
+[submodule "orikami"]
+	path = orikami
+	url = git@github.com:orikami-nl/storybook.git

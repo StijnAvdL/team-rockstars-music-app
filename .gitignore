@@ -1,0 +1,11 @@
+cordova/www
+node_modules
+webpack.json
+.env
+.env-*
+dist
+
+*.xcuserstate
+xcuserdata
+
+cordova/platforms/android/app/build/

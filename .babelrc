@@ -1,0 +1,18 @@
+{
+  "compact": false,
+  "presets": [
+    "stage-2",
+    "react",
+    "es2015"
+  ],
+  "plugins": [
+    "react-require",
+    "babel-root-slash-import",
+    "transform-decorators-legacy",
+    "transform-class-properties"
+  ],
+  "ignore": [
+    "node_modules/**",
+    "node_modules"
+  ]
+}

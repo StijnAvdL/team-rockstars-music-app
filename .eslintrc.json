@@ -1,0 +1,84 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true,
+        "jest": true
+    },
+    "plugins": [
+        "react"
+    ],
+    "extends": [
+        "plugin:prettier/recommended"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true,
+            "experimentalObjectRestSpread": true
+        },
+        "sourceType": "module"
+    },
+    "rules": {
+      "prettier/prettier": "error"
+    },
+    "globals": {
+        "DDP": false,
+        "Mongo": false,
+        "Session": false,
+        "Accounts": false,
+        "Template": false,
+        "Blaze": false,
+        "UI": false,
+        "Match": false,
+        "check": false,
+        "Tracker": false,
+        "Deps": false,
+        "ReactiveVar": false,
+        "EJSON": false,
+        "HTTP": false,
+        "Email": false,
+        "Assets": false,
+        "Handlebars": false,
+        "Package": false,
+        "App": false,
+        "DDPServer": false,
+        "global": false,
+        "Log": false,
+        "MongoInternals": false,
+        "process": false,
+        "WebApp": false,
+        "WebAppInternals": false,
+        "Npm": false,
+        "Tinytest": false,
+        "Random": false,
+        "_": false,
+        "$": false,
+        "FlowLayout": false,
+        "ReactLayout": false,
+        "React": false,
+        "CC": true,
+        "moment": false,
+        "ES": true,
+        "Composer": true,
+        "Jobs": true,
+        "Job": true,
+        "JobCollection": false,
+        "DocHead": false,
+        "regeneratorRuntime": true,
+        "device": false,
+        "PushNotification": false,
+        "TTS": false,
+        "cordova": false,
+        "SubsManager": false,
+        "reportTokenToServer": false,
+        "Kadira": false,
+        "TAPi18n": false,
+        "AWS": false,
+        "webgazer": false,
+        "MediaRecorder": false,
+        "i18n": false,
+        "mui": false,
+        "t": false
+    }
+}
