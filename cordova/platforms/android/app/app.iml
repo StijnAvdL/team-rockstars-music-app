@@ -89,6 +89,11 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 28 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Gradle: com.nimbusds:nimbus-jose-jwt:5.1@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.stephenc.jcip:jcip-annotations:1.0-1@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.microsoft.appcenter:appcenter-analytics:2.4.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.microsoft.appcenter:appcenter-crashes:2.4.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.microsoft.appcenter:appcenter:2.4.1@aar" level="project" />
     <orderEntry type="module" module-name="CordovaLib" />
   </component>
 </module>

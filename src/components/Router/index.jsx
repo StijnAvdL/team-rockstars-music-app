@@ -1,12 +1,12 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
 import { observer } from "mobx-react";
-
 import { AppBar } from "@orikami-nl/orikami-components";
+import Sdmt from "@orikami-nl/sdmt-frontend";
 
-import HomeScreen from "/src/viewmodels/HomeScreen";
-// import Menu from "/src/components/Menu";
-// import menuToggle from "/src/services/menuToggle";
+import Home from "/src/viewmodels/Home";
+import Menu from "/src/components/Menu";
+import MenuModel from "/src/models/Menu";
 
 const propTypesView = {
   page: PropTypes.string,
@@ -14,53 +14,39 @@ const propTypesView = {
   params: PropTypes.object
 };
 
-@observer
-export class RouterView extends Component {
-  render() {
-    const {
-      page,
-      go,
-      // timelineModel
-    } = this.props;
-    // var menuHidden = false;
+const Router = observer((props) => {
+  const { page, go } = props;
+  var content = null;
+  var appBar = <AppBar leftType="menu" title="Janssen" leftAction={MenuModel.toggle} />;
 
-    var content = null;
-    var appBar = <AppBar leftType="menu" title="Janssen" />;
-
-    switch (page) {
-      case "/":
-        content = (
-          <HomeScreen
-            go={go}
-            // timelineModel={timelineModel}
-          />
-        );
-        break;
-    }
-
-    return (
-      <div>
-        {appBar}
-        {content}
-        {/* {menuHidden ? null : (
-          <Menu
-            go={go}
-            currentPath={page}
-            userProfile={userModel.profile}
-            experiments={
-              !study || !study.experiments
-                ? []
-                : study.experiments.map(experiment => experiment.id)
-            }
-            isOpen={menuToggle.isOpen}
-            toggle={menuToggle.toggle}
-            close={menuToggle.close}
-          />
-        )} */}
-      </div>
-    );
+  switch (page) {
+    case "/":
+      content = (
+        <Home go={go} />
+      );
+      break;
+    case "/walking":
+      content = (
+        <p>Walking</p>
+      );
+      break;
+    case "/congintie":
+      content = (
+        <p>SDMT</p>
+      );
+      break;
   }
-}
-RouterView.propTypes = propTypesView;
 
-export default RouterView;
+  return (
+    <div>
+      {appBar}
+      {content}
+      <Menu go={go} />
+    </div>
+  );
+})
+
+Router.propTypes = propTypesView;
+
+export default Router;
+

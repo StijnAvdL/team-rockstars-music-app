@@ -4,6 +4,39 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="AppCenterShared">
+        <param name="onload" value="true" />
+        <param name="android-package" value="com.microsoft.azure.mobile.cordova.AppCenterSharedPlugin" />
+    </feature>
+    <feature name="AppCenterAnalytics">
+        <param name="onload" value="true" />
+        <param name="android-package" value="com.microsoft.azure.mobile.cordova.AppCenterAnalyticsPlugin" />
+    </feature>
+    <feature name="AppCenterCrashes">
+        <param name="onload" value="true" />
+        <param name="android-package" value="com.microsoft.azure.mobile.cordova.AppCenterCrashesPlugin" />
+    </feature>
+    <feature name="Notification">
+        <param name="android-package" value="org.apache.cordova.dialogs.Notification" />
+    </feature>
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+        <param name="onload" value="true" />
+    </feature>
+    <allow-navigation href="cdvfile:*" />
+    <feature name="CordovaHttpPlugin">
+        <param name="android-package" value="com.silkimen.cordovahttp.CordovaHttpPlugin" />
+    </feature>
+    <feature name="Zip">
+        <param name="android-package" value="org.apache.cordova.Zip" />
+    </feature>
+    <feature name="CodePush">
+        <param name="android-package" value="com.microsoft.cordova.CodePush" />
+        <param name="onload" value="true" />
+    </feature>
     <name>HelloCordova</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
@@ -21,4 +54,6 @@
     <allow-intent href="geo:*" />
     <allow-intent href="market:*" />
     <preference name="loglevel" value="DEBUG" />
+    <preference name="APP_SECRET" value="aace5625-a341-4eaa-9711-53710be72449" />
+    <preference name="CodePushDeploymentKey" value="JszbbziwGalMyZHtHAMFiZmqS-QJLfxdwKSbT" />
 </widget>
