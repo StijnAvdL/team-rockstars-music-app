@@ -16,6 +16,9 @@ const theme = createMuiTheme({
       light: "#4dabf5"
     },
   },
+  typography: {
+    fontSize: 18,
+  },
 });
 const router = new RouterModel();
 
