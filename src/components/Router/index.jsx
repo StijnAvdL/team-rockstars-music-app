@@ -1,6 +1,6 @@
-import { Component } from "react";
 import PropTypes from "prop-types";
-import { observer } from "mobx-react";
+import { useObserver } from "mobx-react";
+
 import { AppBar } from "@orikami-nl/orikami-components";
 import Sdmt from "@orikami-nl/sdmt-frontend";
 
@@ -14,7 +14,7 @@ const propTypesView = {
   params: PropTypes.object
 };
 
-const Router = observer((props) => {
+function Router(props)  {
   const { page, go } = props;
   var content = null;
   var appBar = <AppBar leftType="menu" title="Janssen" leftAction={MenuModel.toggle} />;
@@ -37,14 +37,14 @@ const Router = observer((props) => {
       break;
   }
 
-  return (
+  return useObserver(() => (
     <div>
       {appBar}
       {content}
       <Menu go={go} />
     </div>
-  );
-})
+  ));
+}
 
 Router.propTypes = propTypesView;
 

@@ -37,7 +37,7 @@
         <param name="android-package" value="com.microsoft.cordova.CodePush" />
         <param name="onload" value="true" />
     </feature>
-    <name>HelloCordova</name>
+    <name>Janssen demo</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
