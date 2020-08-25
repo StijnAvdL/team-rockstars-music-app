@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import { useObserver } from "mobx-react";
 
 import { AppBar } from "@orikami-nl/orikami-components";
-import Sdmt from "@orikami-nl/sdmt-frontend";
 
 import Home from "/src/viewmodels/Home";
 import Menu from "/src/components/Menu";
