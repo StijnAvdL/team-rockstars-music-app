@@ -29,7 +29,7 @@ function Router(props)  {
         <p>Walking</p>
       );
       break;
-    case "/congintie":
+    case "/cognition":
       content = (
         <p>SDMT</p>
       );

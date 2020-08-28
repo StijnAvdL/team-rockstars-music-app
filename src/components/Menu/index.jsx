@@ -32,9 +32,9 @@ function Menu(props) {
             onClick: () => { go("/walking"); MenuModel.close() }
         },
         {
-            title: "Cognitietest",
+            title: "cognitiontest",
             icon: <CognitionIcon2 />,
-            onClick: () => { go("/congintie"); MenuModel.close() }
+            onClick: () => { go("/cognition"); MenuModel.close() }
         }
     ];
 

@@ -12,12 +12,12 @@ class HomeViewModel extends React.Component {
         const { go } = this.props;
         const tasks = [
             {
-                title: "Looptest",
+                title: "Looptest", // 't' translation module?
                 onClick: () => { go("/walking") }
             },
             {
                 title: "Cognitietest",
-                onClick: () => { go("/congintie") }
+                onClick: () => { go("/cognition") }
             }
         ];
 
