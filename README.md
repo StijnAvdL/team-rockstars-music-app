@@ -14,7 +14,8 @@ Requirements:
 
 ```
 git clone https://github.com/orikami-nl/janssen-demo-app.git
-npm install
+npm uninstall @orikami-nl/orikami-components --save
+npm install @orikami-nl/orikami-components --registry https://npm.pkg.github.com
 ```
 
 ## Development
@@ -33,6 +34,5 @@ Update the following files with the correct **CodePushDeploymentKey**. You can f
 ```
 npm run cordova
 cd cordova
-cordova prepare
 npm run release
 ```
