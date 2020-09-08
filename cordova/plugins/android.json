@@ -8,45 +8,14 @@
   },
   "installed_plugins": {
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "nl.orikami.janssendemo"
-    },
-    "cordova-plugin-appcenter-analytics": {
-      "PACKAGE_NAME": "nl.orikami.janssendemo"
-    },
-    "cordova-plugin-appcenter-crashes": {
-      "PACKAGE_NAME": "nl.orikami.janssendemo"
-    },
-    "cordova-plugin-code-push": {
-      "PACKAGE_NAME": "nl.orikami.janssendemo"
+      "PACKAGE_NAME": "nl.orikami.janssen"
     },
     "sensingkit": {
-      "PACKAGE_NAME": "nl.orikami.janssendemo"
+      "PACKAGE_NAME": "nl.orikami.janssen"
     },
     "uploader": {
-      "PACKAGE_NAME": "nl.orikami.janssendemo"
+      "PACKAGE_NAME": "nl.orikami.janssen"
     }
   },
-  "dependent_plugins": {
-    "cordova-plugin-appcenter-shared": {
-      "PACKAGE_NAME": "nl.orikami.janssendemo"
-    },
-    "code-push": {
-      "PACKAGE_NAME": "nl.orikami.janssendemo"
-    },
-    "cordova-plugin-dialogs": {
-      "PACKAGE_NAME": "nl.orikami.janssendemo"
-    },
-    "cordova-plugin-device": {
-      "PACKAGE_NAME": "nl.orikami.janssendemo"
-    },
-    "cordova-plugin-file": {
-      "PACKAGE_NAME": "nl.orikami.janssendemo"
-    },
-    "cordova-plugin-advanced-http": {
-      "PACKAGE_NAME": "nl.orikami.janssendemo"
-    },
-    "cordova-plugin-zip": {
-      "PACKAGE_NAME": "nl.orikami.janssendemo"
-    }
-  }
+  "dependent_plugins": {}
 }

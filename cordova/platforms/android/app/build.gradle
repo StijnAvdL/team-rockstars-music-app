@@ -98,9 +98,8 @@ ext {
 }
 
 // PLUGIN GRADLE EXTENSIONS START
-apply from: "../cordova-plugin-code-push/janssendemo-build-extras.gradle"
-apply from: "../sensingkit/janssendemo-plugin.gradle"
-apply from: "../uploader/janssendemo-plugin.gradle"
+apply from: "../sensingkit/janssen-plugin.gradle"
+apply from: "../uploader/janssen-plugin.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras1 = file('build-extras.gradle').exists()
@@ -296,9 +295,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
     // SUB-PROJECT DEPENDENCIES START
     implementation(project(path: ":CordovaLib"))
-    implementation "com.microsoft.appcenter:appcenter:2.4.1"
-    implementation "com.microsoft.appcenter:appcenter-analytics:2.4.1"
-    implementation "com.microsoft.appcenter:appcenter-crashes:2.4.1"
     // SUB-PROJECT DEPENDENCIES END
 }
 
