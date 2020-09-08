@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useObserver } from "mobx-react";
 
 import { AppBar } from "@orikami-nl/orikami-components";
+import Sdmt from "@orikami-nl/sdmt-frontend";
 
 import Home from "/src/viewmodels/Home";
 import Menu from "/src/components/Menu";
@@ -13,7 +14,7 @@ const propTypesView = {
   params: PropTypes.object
 };
 
-function Router(props)  {
+function Router(props) {
   const { page, go } = props;
   var content = null;
   var appBar = <AppBar leftType="menu" title="Janssen" leftAction={MenuModel.toggle} />;
@@ -31,8 +32,21 @@ function Router(props)  {
       break;
     case "/cognition":
       content = (
-        <p>SDMT</p>
+        <Sdmt
+          // serverUrl="https://alpha.orikami-api.nl"
+          language="nl"
+          exitTest={() => go("/")}
+          finishTest={() => go("/")}
+          restart={false}
+          practiceBeforeTest={true}
+          disableRipple={true}
+          overlay={true}
+          sensorData={true}
+          s3Bucket="orikami-cordova-plugin"
+          s3Prefix="dev/uploader/"
+        />
       );
+      appBar = null;
       break;
   }
 

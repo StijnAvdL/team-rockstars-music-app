@@ -385,6 +385,12 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "file": "plugins/cordova-plugin-code-push/bin/www/sdk.js",
       "pluginId": "cordova-plugin-code-push",
       "runs": true
+    },
+    {
+      "id": "sensingkit.SensingKit",
+      "file": "plugins/sensingkit/sensingkit.js",
+      "pluginId": "sensingkit",
+      "runs": true
     }
   ];
   module.exports.metadata = {
@@ -398,6 +404,8 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-file": "6.0.2",
     "cordova-plugin-advanced-http": "3.0.1",
     "cordova-plugin-zip": "3.1.0",
-    "cordova-plugin-code-push": "1.12.5"
+    "cordova-plugin-code-push": "1.12.5",
+    "sensingkit": "1.0.11",
+    "uploader": "1.0.6"
   };
 });

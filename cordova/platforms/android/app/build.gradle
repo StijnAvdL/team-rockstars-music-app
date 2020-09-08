@@ -99,6 +99,8 @@ ext {
 
 // PLUGIN GRADLE EXTENSIONS START
 apply from: "../cordova-plugin-code-push/janssendemo-build-extras.gradle"
+apply from: "../sensingkit/janssendemo-plugin.gradle"
+apply from: "../uploader/janssendemo-plugin.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras1 = file('build-extras.gradle').exists()

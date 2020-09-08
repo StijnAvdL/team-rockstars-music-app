@@ -18,6 +18,12 @@
     },
     "cordova-plugin-code-push": {
       "PACKAGE_NAME": "nl.orikami.janssendemo"
+    },
+    "sensingkit": {
+      "PACKAGE_NAME": "nl.orikami.janssendemo"
+    },
+    "uploader": {
+      "PACKAGE_NAME": "nl.orikami.janssendemo"
     }
   },
   "dependent_plugins": {
