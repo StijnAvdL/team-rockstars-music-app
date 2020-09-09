@@ -33,10 +33,10 @@ function Router(props) {
     case "/cognition":
       content = (
         <Sdmt
-          // serverUrl="https://alpha.orikami-api.nl"
+          fullServerUrl="https://alpha.orikami-api.nl/v1/janssen-demo"
           language="nl"
-          exitTest={() => go("/")}
-          finishTest={() => go("/")}
+          exitTest={(data) => {console.log("exitTest", data); go("/")}}
+          finishTest={(data) => {console.log("finishTest", data);}}
           restart={false}
           practiceBeforeTest={true}
           disableRipple={true}

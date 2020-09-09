@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Home from "/src/components/Home";
 import Timeline from "/src/models/Timeline";
 import moment from "moment";
+import { reaction } from "mobx";
 
 const propTypes = {
     go: PropTypes.func
@@ -15,13 +16,18 @@ class HomeViewModel extends React.Component {
         this.timeline = new Timeline();
         this.state = { date: new Date(), loading: false, data: [] };
 
+        reaction(
+            () => this.timeline.init,
+            init => {
+              if (!init) this.getResults(new Date());
+            },
+            { fireImmediately: true }
+          );
+
         this.next = this.next.bind(this);
         this.prev = this.prev.bind(this);
     }
 
-    componentDidMount() {
-        this.getResults(new Date());
-    }
 
     next() {
         const date = moment(this.state.date).add(1, "days");
