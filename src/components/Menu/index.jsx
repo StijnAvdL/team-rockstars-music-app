@@ -26,13 +26,13 @@ function Menu(props) {
             icon: <HomeIcon />,
             onClick: () => { go("/"); MenuModel.close() }
         },
+        // {
+        //     title: "Looptest",
+        //     icon: <WalkingIcon />,
+        //     onClick: () => { go("/walking"); MenuModel.close() }
+        // },
         {
-            title: "Looptest",
-            icon: <WalkingIcon />,
-            onClick: () => { go("/walking"); MenuModel.close() }
-        },
-        {
-            title: "cognitiontest",
+            title: "Cognitiontest",
             icon: <CognitionIcon2 />,
             onClick: () => { go("/cognition"); MenuModel.close() }
         }
