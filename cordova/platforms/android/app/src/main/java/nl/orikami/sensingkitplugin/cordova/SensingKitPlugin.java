@@ -18,12 +18,18 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.sensingkit.sensingkitlib.SKSensorType;
+
 import nl.orikami.sensingkitplugin.service.SensingKitService;
 import nl.orikami.sensingkitplugin.service.Summary;
 import nl.orikami.sensingkitplugin.service.SummaryHandler;
 import nl.orikami.sensingkitplugin.util.ExperimentStatus;
 import nl.orikami.sensingkitplugin.util.ExperimentStatusEvent;
 import nl.orikami.sensingkitplugin.util.SKError;
+import nl.orikami.sensingkitplugin.util.IntentUtil;
 
 /**
  * Created by Orikami on 03-Jan-18.
@@ -39,11 +45,7 @@ public class SensingKitPlugin extends CordovaPlugin {
 
     public static final int SENSINGKIT_REQUEST = 2;
 
-    private static final String[] PERMISSIONS = {
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-    };
+    private String[] PERMISSIONS; 
 
     /**
      * Initializes the plugin, which in this case is only initialization of gson.
@@ -141,8 +143,37 @@ public class SensingKitPlugin extends CordovaPlugin {
             return false;
         }
 
+        setPermissions();
         requestPermissionsAndStartService();
         return true;
+    }
+
+    public void setPermissions() {
+        if(PERMISSIONS == null) {
+            ArrayList<String> temp = new ArrayList<>();
+            boolean walkingTest = IntentUtil.extractBooleanExtra(intent, SensingKitService.WALK_TEST_ARG);
+
+            if(walkingTest) {
+                temp.add(Manifest.permission.ACCESS_FINE_LOCATION);
+                temp.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+            } else {
+                List<SKSensorType> sensorTypes = IntentUtil.extractSensorTypeExtras(
+                    intent, SensingKitService.SENSOR_TYPE_LIST_ARG, SensingKitService.DEFAULT_SENSOR_TYPES
+                );
+                for (SKSensorType sensorType : sensorTypes) {
+                    if (SKSensorType.AUDIO_LEVEL == sensorType) {
+                        temp.add(Manifest.permission.RECORD_AUDIO);
+                    } else if(SKSensorType.LOCATION == sensorType) {
+                        temp.add(Manifest.permission.ACCESS_FINE_LOCATION);
+                        temp.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+                    }
+                }
+            }
+            temp.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+            PERMISSIONS = new String[temp.size()];
+            PERMISSIONS = temp.toArray(PERMISSIONS);
+        }
     }
 
     public boolean checkPermissions() {

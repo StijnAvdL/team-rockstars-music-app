@@ -58,6 +58,14 @@ public class SensingKitService extends Service {
     public final static String S3_PREFIX_ARG = "s3_prefix";
     public final static String SENSOR_TYPE_LIST_ARG = "sensor_type_list";
 
+    // Default sensors that are used when collecting sensor data.
+    public final static List<SKSensorType> DEFAULT_SENSOR_TYPES = Arrays.asList(
+            SKSensorType.ACCELEROMETER, SKSensorType.GYROSCOPE, SKSensorType.MAGNETOMETER,
+            SKSensorType.LOCATION, SKSensorType.ROTATION, SKSensorType.GRAVITY,
+            SKSensorType.LINEAR_ACCELERATION, SKSensorType.BATTERY, SKSensorType.STEP_DETECTOR,
+            SKSensorType.STEP_COUNTER, SKSensorType.MOTION_ACTIVITY, SKSensorType.AUDIO_LEVEL
+    );
+
     /**
      * The default value for originalMusicVolume while the volume has not been retrieved from the
      * system.
@@ -96,14 +104,6 @@ public class SensingKitService extends Service {
     private MediaPlayer countdownMediaPlayer;
 
     private int originalMusicVolume = DEFAULT_VOLUME_VALUE;
-
-    // Default sensors that are used when collecting sensor data.
-    private final static List<SKSensorType> DEFAULT_SENSOR_TYPES = Arrays.asList(
-            SKSensorType.ACCELEROMETER, SKSensorType.GYROSCOPE, SKSensorType.MAGNETOMETER,
-            SKSensorType.LOCATION, SKSensorType.ROTATION, SKSensorType.GRAVITY,
-            SKSensorType.LINEAR_ACCELERATION, SKSensorType.BATTERY, SKSensorType.STEP_DETECTOR,
-            SKSensorType.STEP_COUNTER, SKSensorType.MOTION_ACTIVITY, SKSensorType.AUDIO_LEVEL
-    );
 
     /**
      * Starting point for the service and handles what action should be taken based on the action

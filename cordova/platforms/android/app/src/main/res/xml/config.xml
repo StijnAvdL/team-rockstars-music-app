@@ -4,14 +4,14 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="Uploader">
+        <param name="android-package" value="nl.orikami.uploader.UploadCordovaPlugin" />
+    </feature>
     <feature name="SensingKit">
         <param name="android-package" value="nl.orikami.sensingkitplugin.cordova.SensingKitPlugin" />
         <param name="onload" value="true" />
     </feature>
-    <feature name="Uploader">
-        <param name="android-package" value="nl.orikami.uploader.UploadCordovaPlugin" />
-    </feature>
-    <name>Janssen</name>
+    <name>MM Fit</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>

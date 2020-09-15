@@ -10,10 +10,10 @@
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "nl.orikami.janssen"
     },
-    "sensingkit": {
+    "uploader": {
       "PACKAGE_NAME": "nl.orikami.janssen"
     },
-    "uploader": {
+    "sensingkit": {
       "PACKAGE_NAME": "nl.orikami.janssen"
     }
   },

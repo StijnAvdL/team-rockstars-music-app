@@ -1,19 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Home from "/src/components/Home";
-import Timeline from "/src/models/Timeline";
 import moment from "moment";
 import { reaction } from "mobx";
 
 const propTypes = {
-    go: PropTypes.func
+    go: PropTypes.func,
+    timeline: PropTypes.object
 };
 
 class HomeViewModel extends React.Component {
-    constructor() {
+    constructor(props) {
         super();
 
-        this.timeline = new Timeline();
+        this.timeline = props.timeline;
         this.state = { date: new Date(), loading: false, data: [] };
 
         reaction(
@@ -28,13 +28,17 @@ class HomeViewModel extends React.Component {
         this.prev = this.prev.bind(this);
     }
 
+    componentDidMount() {
+        if(!this.timeline.init) {
+            this.getResults(new Date());
+        }
+    }
 
     next() {
         const date = moment(this.state.date).add(1, "days");
         this.setState({ date: date, loading: true });
         this.getResults(date);
     }
-
 
     prev() {
         const date = moment(this.state.date).subtract(1, "day");
