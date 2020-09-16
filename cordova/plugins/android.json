@@ -15,6 +15,9 @@
     },
     "sensingkit": {
       "PACKAGE_NAME": "nl.orikami.janssen"
+    },
+    "cordova-plugin-android-permissions": {
+      "PACKAGE_NAME": "nl.orikami.janssen"
     }
   },
   "dependent_plugins": {}

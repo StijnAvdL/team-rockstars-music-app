@@ -5,11 +5,20 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "file": "plugins/sensingkit/sensingkit.js",
       "pluginId": "sensingkit",
       "runs": true
+    },
+    {
+      "id": "cordova-plugin-android-permissions.Permissions",
+      "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
+      "pluginId": "cordova-plugin-android-permissions",
+      "clobbers": [
+        "cordova.plugins.permissions"
+      ]
     }
   ];
   module.exports.metadata = {
     "cordova-plugin-whitelist": "1.3.4",
     "uploader": "1.0.6",
-    "sensingkit": "1.0.11"
+    "sensingkit": "1.0.11",
+    "cordova-plugin-android-permissions": "1.1.0"
   };
 });
