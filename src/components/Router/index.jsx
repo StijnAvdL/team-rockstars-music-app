@@ -41,6 +41,7 @@ function Router(props) {
           language="nl"
           exitTest={() => go("/")}
           finishTest={(data) => {
+            console.log("data", data)
             timeline.all.push({
               type: "sdmt",
               timestamp: new Date(),

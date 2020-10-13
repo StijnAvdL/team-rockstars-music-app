@@ -7,12 +7,12 @@ function startWeb() {
 
 if (window.cordova) {
     document.addEventListener("deviceready", () => {
-        // codePush.sync();
+        codePush.sync();
         startWeb();
     }, false);
 
     document.addEventListener("resume", () => {
-        // codePush.sync();
+        codePush.sync();
     }, false);
 } else {
     startWeb();

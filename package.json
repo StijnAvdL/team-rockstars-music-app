@@ -4,7 +4,7 @@
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
     "build": "node ./node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production ./node_modules/webpack/bin/webpack.js --mode=production --config webpack.config.js  --target web",
-    "cordova": "node ./node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development ./node_modules/webpack/bin/webpack.js --mode=development --config webpack.config.js --env.STAGE=staging"
+    "cordova": "node ./node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development ./node_modules/webpack/bin/webpack.js --mode=development --config webpack.config.js --env.STAGE=staging && cd cordova && cordova prepare && cd .."
   },
   "devDependencies": {
     "babel": "^6.x.x",
@@ -41,7 +41,7 @@
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@orikami-nl/orikami-components": "^0.1.48",
-    "@orikami-nl/sdmt-frontend": "^0.1.42",
+    "@orikami-nl/sdmt-frontend": "^0.1.44",
     "cordova": "^9.0.0",
     "dotenv-webpack": "^1.7.0",
     "mobx": "^5.15.6",
