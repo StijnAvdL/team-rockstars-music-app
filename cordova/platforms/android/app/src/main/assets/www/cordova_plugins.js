@@ -387,7 +387,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-advanced-http": "3.0.1",
     "cordova-plugin-zip": "3.1.0",
     "cordova-plugin-code-push": "1.13.1",
-    "uploader": "1.0.7",
-    "sensingkit": "1.0.12"
+    "sensingkit": "1.0.12",
+    "uploader": "1.0.7"
   };
 });

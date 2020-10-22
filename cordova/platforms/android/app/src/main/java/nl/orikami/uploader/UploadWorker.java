@@ -36,7 +36,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import nl.orikami.sensingkitplugin.util.EventBusUtil;
+//import nl.orikami.sensingkitplugin.util.EventBusUtil;
 
 /**
  * Created by mark on 15/05/2018.
@@ -244,7 +244,7 @@ public class UploadWorker extends Worker {
                 String responseString = response.body().string();
                 Log.d(TAG, "API response: " + responseString);
                 EventBus.getDefault().postSticky(responseString);
-                EventBusUtil.postString(responseString);
+//                EventBusUtil.postString(responseString);
 
                 // Move the uploaded file to the uploaded directory.
                 File uploadDirectory = new File(file.getParentFile().getParentFile(), "uploaded");

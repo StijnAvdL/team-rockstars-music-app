@@ -37,11 +37,11 @@
               "count": 1
             },
             {
-              "xml": "<feature name=\"Uploader\"><param name=\"android-package\" value=\"nl.orikami.uploader.UploadCordovaPlugin\" /></feature>",
+              "xml": "<feature name=\"SensingKit\"><param name=\"android-package\" value=\"nl.orikami.sensingkitplugin.cordova.SensingKitPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
               "count": 1
             },
             {
-              "xml": "<feature name=\"SensingKit\"><param name=\"android-package\" value=\"nl.orikami.sensingkitplugin.cordova.SensingKitPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+              "xml": "<feature name=\"Uploader\"><param name=\"android-package\" value=\"nl.orikami.uploader.UploadCordovaPlugin\" /></feature>",
               "count": 1
             }
           ],
@@ -175,10 +175,10 @@
     "cordova-plugin-code-push": {
       "PACKAGE_NAME": "nl.orikami.janssen"
     },
-    "uploader": {
+    "sensingkit": {
       "PACKAGE_NAME": "nl.orikami.janssen"
     },
-    "sensingkit": {
+    "uploader": {
       "PACKAGE_NAME": "nl.orikami.janssen"
     }
   },
@@ -571,7 +571,7 @@
     "cordova-plugin-advanced-http": "3.0.1",
     "cordova-plugin-zip": "3.1.0",
     "cordova-plugin-code-push": "1.13.1",
-    "uploader": "1.0.7",
-    "sensingkit": "1.0.12"
+    "sensingkit": "1.0.12",
+    "uploader": "1.0.7"
   }
 }
