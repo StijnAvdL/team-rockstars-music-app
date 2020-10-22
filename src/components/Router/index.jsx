@@ -3,6 +3,7 @@ import { useObserver } from "mobx-react";
 
 import { AppBar } from "@orikami-nl/orikami-components";
 import Sdmt from "@orikami-nl/sdmt-frontend";
+import Tug from "@orikami-nl/tug-frontend";
 
 import Home from "/src/viewmodels/Home";
 import Menu from "/src/components/Menu";
@@ -41,7 +42,6 @@ function Router(props) {
           language="nl"
           exitTest={() => go("/")}
           finishTest={(data) => {
-            console.log("data", data)
             timeline.all.push({
               type: "sdmt",
               timestamp: new Date(),
@@ -56,6 +56,22 @@ function Router(props) {
           s3Bucket="orikami-cordova-plugin"
           s3Prefix="dev/uploader/"
         />
+      );
+      appBar = null;
+      break;
+    case "/tug":
+      content = (
+        <Tug
+          language="nl"
+          exitTest={() => go("/")}
+          finishTest={(data) => {
+            timeline.all.push({
+              type: "tug",
+              timestamp: new Date(),
+              value: `${Math.round(data.value * 10) / 10} sec`
+            });
+          }}
+          serverUrl="https://alpha.orikami-api.nl/v1/janssen-demo" />
       );
       appBar = null;
       break;

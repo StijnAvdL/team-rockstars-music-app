@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.Locale;
 
 public class UploadLogger {
-    private static String VERSION = "1.0.6";
+    private static String VERSION = "1.0.5";
     private static String TAG = "UploadLogger";
     private static String header = "timestamp,uuid,event,bucket,key,part,message,hasUploadId,fileAttempts,completed,total,chunksHaveAttemptsLeft,fileSize,etag,chunkAttempts,isRunning,taskId,background,network,version\n";
 
@@ -165,15 +165,16 @@ public class UploadLogger {
     }
 
     private void copy(File src, File dst) throws IOException {
-        try (InputStream in = new FileInputStream(src)) {
-            try (OutputStream out = new FileOutputStream(dst)) {
-                // Transfer bytes from in to out
-                byte[] buf = new byte[1024];
-                int len;
-                while ((len = in.read(buf)) > 0) {
-                    out.write(buf, 0, len);
-                }
-            }
+        InputStream in = new FileInputStream(src);
+        OutputStream out = new FileOutputStream(dst);
+        // Transfer bytes from in to out
+        byte[] buf = new byte[1024];
+        int len;
+        while ((len = in.read(buf)) > 0) {
+            out.write(buf, 0, len);
         }
+        in.close();
+        out.flush();
+        out.close();
     }
 }

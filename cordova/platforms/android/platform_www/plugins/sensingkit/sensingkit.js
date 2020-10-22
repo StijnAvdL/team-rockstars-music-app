@@ -4,7 +4,7 @@ cordova.define("sensingkit.SensingKit", function(require, exports, module) {
   const callbacks = [];
 
   const SensingKit = {};
-  SensingKit.version = "1.0.11";
+  SensingKit.version = "1.0.12";
   SensingKit.start = opts => {
     return new Promise((resolve, reject) =>
       cordova.exec(resolve, reject, "SensingKit", "start", [opts])

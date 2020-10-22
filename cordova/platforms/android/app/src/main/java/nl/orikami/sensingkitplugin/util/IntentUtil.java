@@ -95,7 +95,7 @@ public class IntentUtil {
             case "linear_acceleration":
                 return SKSensorType.LINEAR_ACCELERATION;
             case "battery":
-                return SKSensorType.BATTERY;
+                return SKSensorType.BATTERY_STATUS;
             case "step_detector":
                 return SKSensorType.STEP_DETECTOR;
             case "step_counter":

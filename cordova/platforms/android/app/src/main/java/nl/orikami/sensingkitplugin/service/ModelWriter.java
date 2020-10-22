@@ -2,11 +2,11 @@ package nl.orikami.sensingkitplugin.service;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKExceptionErrorCode;
-import org.sensingkit.sensingkitlib.SKSensorDataListener;
+import org.sensingkit.sensingkitlib.SKSensorDataHandler;
 import org.sensingkit.sensingkitlib.SKSensorType;
 import org.sensingkit.sensingkitlib.data.SKAccelerometerData;
 import org.sensingkit.sensingkitlib.data.SKAudioLevelData;
-import org.sensingkit.sensingkitlib.data.SKBatteryData;
+import org.sensingkit.sensingkitlib.data.SKBatteryStatusData;
 import org.sensingkit.sensingkitlib.data.SKGravityData;
 import org.sensingkit.sensingkitlib.data.SKGyroscopeData;
 import org.sensingkit.sensingkitlib.data.SKLinearAccelerationData;
@@ -30,7 +30,7 @@ import nl.orikami.sensingkitplugin.util.FileUtil;
  * Handles data callbacks from a single sensor and writes the data to a file if possible.
  * Multiple ModelWriters have to be created if data should be received from multiple sensors.
  */
-public class ModelWriter implements SKSensorDataListener {
+public class ModelWriter implements SKSensorDataHandler {
 
     private final static String TAG = ModelWriter.class.getSimpleName();
 
@@ -155,8 +155,8 @@ public class ModelWriter implements SKSensorDataListener {
                 return SKAccelerometerData.csvHeader() + "\n";
             case AUDIO_LEVEL:
                 return SKAudioLevelData.csvHeader() + "\n";
-            case BATTERY:
-                return SKBatteryData.csvHeader() + "\n";
+            case BATTERY_STATUS:
+                return SKBatteryStatusData.csvHeader() + "\n";
             case ROTATION:
                 return SKRotationData.csvHeader() + "\n";
             case STEP_DETECTOR:
