@@ -42,7 +42,7 @@ function Router(props) {
           language="nl"
           exitTest={() => go("/")}
           finishTest={(data) => {
-            timeline.all.push({
+            timeline.all.unshift({
               type: "sdmt",
               timestamp: new Date(),
               value: `${data.value.correct}/${data.value.nb}`
@@ -65,7 +65,7 @@ function Router(props) {
           language="nl"
           exitTest={() => go("/")}
           finishTest={(data) => {
-            timeline.all.push({
+            timeline.all.unshift({
               type: "tug",
               timestamp: new Date(),
               value: `${Math.round(data.value * 10) / 10} sec`
