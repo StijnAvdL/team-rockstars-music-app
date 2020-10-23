@@ -9,4 +9,7 @@ dependencies {
     implementation "android.arch.core:runtime:1.1.1"
     implementation "android.arch.work:work-runtime:$work_version"
     implementation "android.arch.work:work-firebase:$work_version"
+
+    implementation "androidx.annotation:annotation:1.1.0"
+    implementation "com.squareup.okhttp3:okhttp:4.8.1"
 }

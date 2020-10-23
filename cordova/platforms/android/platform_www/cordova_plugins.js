@@ -1,12 +1,6 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
   module.exports = [
     {
-      "id": "sensingkit.SensingKit",
-      "file": "plugins/sensingkit/sensingkit.js",
-      "pluginId": "sensingkit",
-      "runs": true
-    },
-    {
       "id": "cordova-plugin-android-permissions.Permissions",
       "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
       "pluginId": "cordova-plugin-android-permissions",
@@ -375,12 +369,16 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "file": "plugins/cordova-plugin-code-push/bin/www/sdk.js",
       "pluginId": "cordova-plugin-code-push",
       "runs": true
+    },
+    {
+      "id": "sensingkit.SensingKit",
+      "file": "plugins/sensingkit/sensingkit.js",
+      "pluginId": "sensingkit",
+      "runs": true
     }
   ];
   module.exports.metadata = {
     "cordova-plugin-whitelist": "1.3.4",
-    "uploader": "1.0.6",
-    "sensingkit": "1.0.11",
     "cordova-plugin-android-permissions": "1.1.0",
     "code-push": "3.0.1",
     "cordova-plugin-dialogs": "2.0.2",
@@ -388,6 +386,8 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-file": "6.0.2",
     "cordova-plugin-advanced-http": "3.0.1",
     "cordova-plugin-zip": "3.1.0",
-    "cordova-plugin-code-push": "1.13.1"
+    "cordova-plugin-code-push": "1.13.1",
+    "sensingkit": "1.0.12",
+    "uploader": "1.0.7"
   };
 });

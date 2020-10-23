@@ -107,6 +107,15 @@ public class EventBusUtil {
     }
 
     /**
+     * Post an status event on EventBus where the value is an String
+     *
+     * @param event String enum indicating the type of String.
+     */
+    public static void postString(String event) {
+        EventBus.getDefault().postSticky(event);
+    }
+
+    /**
      * Post a provided experiment status event on EventBus as a sticky event.
      *
      * @param experimentStatusEvent The plugin status event that should be posted on EventBus.

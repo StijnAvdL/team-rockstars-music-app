@@ -54,10 +54,10 @@ class HomeViewModel extends React.Component {
         const { go } = this.props;
         const today = moment(this.state.date).isSame(moment(new Date()), "day");
         const tasks = [
-            // {
-            //     title: "Looptest",
-            //     onClick: () => { go("/walking") }
-            // },
+            {
+                title: "Tug",
+                onClick: () => { go("/tug") }
+            },
             {
                 title: "Cognitietest",
                 onClick: () => { go("/cognition") }

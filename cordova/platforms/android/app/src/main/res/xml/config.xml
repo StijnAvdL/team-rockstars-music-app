@@ -4,13 +4,6 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
-    <feature name="Uploader">
-        <param name="android-package" value="nl.orikami.uploader.UploadCordovaPlugin" />
-    </feature>
-    <feature name="SensingKit">
-        <param name="android-package" value="nl.orikami.sensingkitplugin.cordova.SensingKitPlugin" />
-        <param name="onload" value="true" />
-    </feature>
     <feature name="Permissions">
         <param name="android-package" value="com.android.plugins.Permissions" />
     </feature>
@@ -27,6 +20,13 @@
     <allow-navigation href="cdvfile:*" />
     <feature name="CordovaHttpPlugin">
         <param name="android-package" value="com.silkimen.cordovahttp.CordovaHttpPlugin" />
+    </feature>
+    <feature name="SensingKit">
+        <param name="android-package" value="nl.orikami.sensingkitplugin.cordova.SensingKitPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Uploader">
+        <param name="android-package" value="nl.orikami.uploader.UploadCordovaPlugin" />
     </feature>
     <feature name="Zip">
         <param name="android-package" value="org.apache.cordova.Zip" />
@@ -52,5 +52,5 @@
     <allow-intent href="geo:*" />
     <allow-intent href="market:*" />
     <preference name="loglevel" value="DEBUG" />
-    <preference name="CodePushDeploymentKey" value="JszbbziwGalMyZHtHAMFiZmqS-QJLfxdwKSbT" />
+    <preference name="CodePushDeploymentKey" value="lpgU3Ekp_yAP48-OblpIR1jiEpnhcoIyQY41a" />
 </widget>

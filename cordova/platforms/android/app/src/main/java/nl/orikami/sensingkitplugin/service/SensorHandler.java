@@ -78,7 +78,7 @@ public class SensorHandler {
         }
 
         try {
-            sensingKitLib.subscribeSensorDataListener(sensorType, modelWriter);
+            sensingKitLib.subscribeSensorDataHandler(sensorType, modelWriter);
         } catch (SKException e) {
             Log.d(TAG, "Could not subscribe a listener to " + sensorType);
             e.printStackTrace();
@@ -131,7 +131,7 @@ public class SensorHandler {
      */
     public void close() {
         try {
-            sensingKitLib.unsubscribeAllSensorDataListeners(sensorType);
+            sensingKitLib.unsubscribeAllSensorDataHandlers(sensorType);
         } catch (SKException e) {
             Log.e(TAG, "Could not unsubscribe all listeners from " + sensorType);
             e.printStackTrace();
@@ -194,7 +194,7 @@ public class SensorHandler {
             case AUDIO_LEVEL:
                 // No config
                 return null;
-            case BATTERY:
+            case BATTERY_STATUS:
                 // No config
                 return null;
             case ROTATION:
@@ -230,7 +230,7 @@ public class SensorHandler {
                 return motionActivityConfiguration;
             case LOCATION:
                 SKLocationConfiguration locationConfiguration = new SKLocationConfiguration();
-                locationConfiguration.setPriority(SKLocationConfiguration.Priority.HIGH_ACCURACY);
+                locationConfiguration.setPriority(SKLocationConfiguration.SKPriority.HIGH_ACCURACY);
                 locationConfiguration.setFastestInterval(10);
                 locationConfiguration.setInterval(100);
                 return locationConfiguration;
@@ -250,7 +250,7 @@ public class SensorHandler {
                 return "accelerometer";
             case AUDIO_LEVEL:
                 return "audioLevel";
-            case BATTERY:
+            case BATTERY_STATUS:
                 return "battery";
             case ROTATION:
                 return "rotation";

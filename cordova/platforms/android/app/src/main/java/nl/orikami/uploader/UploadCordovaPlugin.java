@@ -27,15 +27,17 @@ public class UploadCordovaPlugin extends CordovaPlugin {
         if (action.equals("uploadLogs")) {
             String bucket = args.getString(0);
             String s3prefix = args.getString(1);
-            new Upload.Logs(bucket, s3prefix).schedule(cordova.getContext());
+            String url = args.getString(2);
+            new Upload.Logs(bucket, s3prefix, url).schedule(cordova.getContext());
             PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
             callbackContext.sendPluginResult(pluginResult);            
             return true;
         } else if(action.equals("uploadTest")) {
             String bucket = args.getString(0);
             String s3prefix = args.getString(1);
+            String url = args.getString(2);
             int mb = args.getInt(2);
-            upload(bucket, s3prefix, mb);
+            upload(bucket, s3prefix, mb, url);
             PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
             callbackContext.sendPluginResult(pluginResult);
             return true;
@@ -43,7 +45,7 @@ public class UploadCordovaPlugin extends CordovaPlugin {
         return false;
     }
 
-    protected void upload(String bucket, String s3prefix, int mb) {
+    protected void upload(String bucket, String s3prefix, int mb, String url) {
         int bytes = mb * 1024 * 1024;
 
         String filename = DateFormat.format("yyyy-MM-dd-HHmmss", new java.util.Date()) + ".txt";
@@ -58,7 +60,7 @@ public class UploadCordovaPlugin extends CordovaPlugin {
                 writer.write("0123456789");
             }
             writer.close();
-            new Upload(file, bucket,String.format("%s%s", s3prefix, filename))
+            new Upload(file, bucket,String.format("%s%s", s3prefix, filename), url)
                     .schedule(cordova.getContext());
 
         } catch(IOException error) {

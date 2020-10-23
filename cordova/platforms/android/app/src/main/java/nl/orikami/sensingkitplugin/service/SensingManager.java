@@ -44,7 +44,7 @@ public class SensingManager {
             Context context, File experimentDirectory, List<SKSensorType> sensorTypes
     ) throws SKException {
 
-        SensingKitLibInterface sensingKitLib = SensingKitLib.getSensingKitLib(context);
+        SensingKitLibInterface sensingKitLib = SensingKitLib.sharedSensingKitLib(context);
 
         sensorHandlers = new ArrayList<SensorHandler>();
 

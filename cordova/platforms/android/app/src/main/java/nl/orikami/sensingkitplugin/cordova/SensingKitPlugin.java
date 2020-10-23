@@ -126,6 +126,7 @@ public class SensingKitPlugin extends CordovaPlugin {
             intent.putExtra(SensingKitService.S3_BUCKET_ARG, arguments.s3Bucket);
             intent.putExtra(SensingKitService.S3_PREFIX_ARG, arguments.s3Prefix);
             intent.putExtra(SensingKitService.SENSOR_TYPE_LIST_ARG, arguments.sensors);
+            intent.putExtra(SensingKitService.URL_ARG, arguments.url);
         } else if (action.equals("startWalkingExperiment")) {
             PluginArguments arguments = extractArguments(args);
             Log.d(TAG, "Plugin arguments: " + arguments);
@@ -247,6 +248,19 @@ public class SensingKitPlugin extends CordovaPlugin {
             callbackContext.sendPluginResult(pluginResult);
 
             EventBus.getDefault().removeStickyEvent(ExperimentStatusEvent.class);
+        }
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onExperimentStatusEvent(String event) {
+        if(callbackContext != null) {
+            Log.d(TAG, "Received: " + event);
+
+            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, event);
+            pluginResult.setKeepCallback(true);
+            callbackContext.sendPluginResult(pluginResult);
+
+            EventBus.getDefault().removeStickyEvent(String.class);
         }
     }
 

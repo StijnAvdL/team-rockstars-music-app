@@ -10,7 +10,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import HomeIcon from '@material-ui/icons/Home';
-import CognitionIcon from '@material-ui/icons/EmojiObjects';
 import WalkingIcon from '@material-ui/icons/DirectionsWalk';
 import CognitionIcon2 from '@material-ui/icons/Extension';
 
@@ -26,11 +25,11 @@ function Menu(props) {
             icon: <HomeIcon />,
             onClick: () => { go("/"); MenuModel.close() }
         },
-        // {
-        //     title: "Looptest",
-        //     icon: <WalkingIcon />,
-        //     onClick: () => { go("/walking"); MenuModel.close() }
-        // },
+        {
+            title: "Tug",
+            icon: <WalkingIcon />,
+            onClick: () => { go("/tug"); MenuModel.close() }
+        },
         {
             title: "Cognitiontest",
             icon: <CognitionIcon2 />,

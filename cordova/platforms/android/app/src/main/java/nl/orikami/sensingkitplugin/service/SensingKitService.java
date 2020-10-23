@@ -9,8 +9,9 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
-import android.support.annotation.Nullable;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import org.sensingkit.sensingkitlib.SKException;
 import org.sensingkit.sensingkitlib.SKSensorType;
@@ -57,12 +58,13 @@ public class SensingKitService extends Service {
     public final static String WALK_TEST_ARG = "start_walk_test";
     public final static String S3_PREFIX_ARG = "s3_prefix";
     public final static String SENSOR_TYPE_LIST_ARG = "sensor_type_list";
+    public final static String URL_ARG = "url";
 
     // Default sensors that are used when collecting sensor data.
     public final static List<SKSensorType> DEFAULT_SENSOR_TYPES = Arrays.asList(
             SKSensorType.ACCELEROMETER, SKSensorType.GYROSCOPE, SKSensorType.MAGNETOMETER,
             SKSensorType.LOCATION, SKSensorType.ROTATION, SKSensorType.GRAVITY,
-            SKSensorType.LINEAR_ACCELERATION, SKSensorType.BATTERY, SKSensorType.STEP_DETECTOR,
+            SKSensorType.LINEAR_ACCELERATION, SKSensorType.BATTERY_STATUS, SKSensorType.STEP_DETECTOR,
             SKSensorType.STEP_COUNTER, SKSensorType.MOTION_ACTIVITY, SKSensorType.AUDIO_LEVEL
     );
 
@@ -96,6 +98,7 @@ public class SensingKitService extends Service {
     private String experimentId;
     private String s3Prefix;
     private String s3Bucket;
+    private String url;
 
     private PowerManager.WakeLock wakeLock;
 
@@ -148,6 +151,7 @@ public class SensingKitService extends Service {
             experimentId = IntentUtil.extractRequiredStringExtra(intent, EXPERIMENT_ID_ARG);
             s3Prefix = IntentUtil.extractRequiredStringExtra(intent, S3_PREFIX_ARG);
             s3Bucket = IntentUtil.extractRequiredStringExtra(intent, S3_BUCKET_ARG);
+            url = IntentUtil.extractRequiredStringExtra(intent, URL_ARG);
             List<SKSensorType> sensorTypes = IntentUtil.extractSensorTypeExtras(
                     intent, SENSOR_TYPE_LIST_ARG, DEFAULT_SENSOR_TYPES
             );
@@ -255,7 +259,7 @@ public class SensingKitService extends Service {
 
         try {
             File zipFile = FileUtil.getZipFile(experimentId);
-            new Upload(zipFile, s3Bucket, s3Prefix + experimentId + ".zip").schedule(getApplicationContext());
+            new Upload(zipFile, s3Bucket, s3Prefix + experimentId + ".zip", url).schedule(getApplicationContext());
         } catch (Exception error) {
             error.printStackTrace();
         }
@@ -345,7 +349,7 @@ public class SensingKitService extends Service {
         if ((wakeLock == null) || (!wakeLock.isHeld())) {
             PowerManager powerManager = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
             if (powerManager == null) return;
-            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "WakeLock");
+            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "sensingkit:WakeLock");
             wakeLock.acquire(300000);
         }
     }

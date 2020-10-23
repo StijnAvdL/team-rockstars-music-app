@@ -1,9 +1,7 @@
 package nl.orikami.uploader;
 
-import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.common.util.concurrent.ListenableFuture;
@@ -13,6 +11,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
 import androidx.work.BackoffPolicy;
 import androidx.work.Constraints;
 import androidx.work.Data;
@@ -52,11 +51,13 @@ public class Upload {
     private File file;
     private String bucket;
     private String key;
+    private String url;
 
-    public Upload(@NonNull File file, @NonNull String bucket, @NonNull String key) {
+    public Upload(@NonNull File file, @NonNull String bucket, @NonNull String key, String url) {
         this.file = file;
         this.bucket = bucket;
         this.key = key;
+        this.url = url;
     }
 
     public UUID schedule(Context context) {
@@ -72,6 +73,7 @@ public class Upload {
                 .putString(UploadWorker.INPUT_FILENAME, filename)
                 .putString(UploadWorker.INPUT_BUCKET, bucket)
                 .putString(UploadWorker.INPUT_KEY, key)
+                .putString(UploadWorker.INPUT_URL, url)
                 .build();
 
         final UploadLogger logger = new UploadLogger(context);
@@ -113,16 +115,18 @@ public class Upload {
     public static class Logs {
         private String bucket;
         private String s3prefix;
+        private String url;
 
-        public Logs(@NonNull String bucket, @NonNull String s3prefix) {
+        public Logs(@NonNull String bucket, @NonNull String s3prefix, @NonNull String url) {
             this.bucket =  bucket;
             this.s3prefix = s3prefix;
+            this.url = url;
         }
         public void schedule(Context context) {
             UploadLogger logger = new UploadLogger(context);
             for(File file : logger.getFiles()) {
                 String filename = file.getName();
-                new Upload(file, bucket, s3prefix + filename).schedule(context);
+                new Upload(file, bucket, s3prefix + filename, url).schedule(context);
             }
         }
     }

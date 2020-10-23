@@ -20,6 +20,8 @@ class Timeline {
                     };
                     if (result.type === "sdmt") {
                         result.value = `${d.value.correct}/${d.value.nb}`;
+                    } else if(result.type === "tug") {
+                        result.value = `${Math.round(d.value.duration * 10) / 10} sec`;
                     }
                     this.all.push(result);
                 });
@@ -31,7 +33,7 @@ class Timeline {
         var data = [];
 
         this.all.map(d => {
-            if (moment(d.timestamp).isSame(moment(date), "day") && d.type === "sdmt") {
+            if (moment(d.timestamp).isSame(moment(date), "day") && (d.type === "sdmt" || d.type === "tug")) {
                 data.push(d)
             }
         });

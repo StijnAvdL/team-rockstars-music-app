@@ -7,22 +7,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "uploader": {
-    "source": {
-      "type": "local",
-      "path": "C:\\Users\\Stijn_temp\\Documents\\orikami\\projects\\janssen-demo-app\\cordova\\node_modules\\uploader"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
-  "sensingkit": {
-    "source": {
-      "type": "local",
-      "path": "C:\\Users\\Stijn_temp\\Documents\\orikami\\projects\\janssen-demo-app\\cordova\\node_modules\\sensingkit"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-android-permissions": {
     "source": {
       "type": "registry",
@@ -85,6 +69,22 @@
       "id": "cordova-plugin-zip@>=3.1.0"
     },
     "is_top_level": false,
+    "variables": {}
+  },
+  "sensingkit": {
+    "source": {
+      "type": "local",
+      "path": "C:\\Users\\Stijn_temp\\Documents\\orikami\\projects\\janssen-demo-app\\cordova\\node_modules\\sensingkit"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "uploader": {
+    "source": {
+      "type": "local",
+      "path": "C:\\Users\\Stijn_temp\\Documents\\orikami\\projects\\janssen-demo-app\\cordova\\node_modules\\uploader"
+    },
+    "is_top_level": true,
     "variables": {}
   }
 }

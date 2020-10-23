@@ -3,7 +3,7 @@ package nl.orikami.uploader;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
-import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
@@ -16,15 +16,27 @@ import com.amazonaws.services.s3.model.InitiateMultipartUploadRequest;
 import com.amazonaws.services.s3.model.InitiateMultipartUploadResult;
 import com.amazonaws.services.s3.model.UploadPartRequest;
 import com.amazonaws.services.s3.model.UploadPartResult;
+import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 
+import androidx.annotation.NonNull;
 import androidx.work.Data;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+//import nl.orikami.sensingkitplugin.util.EventBusUtil;
 
 /**
  * Created by mark on 15/05/2018.
@@ -50,12 +62,14 @@ public class UploadWorker extends Worker {
     static final String INPUT_FILENAME = "file";
     static final String INPUT_BUCKET = "bucket";
     static final String INPUT_KEY = "key";
+    static final String INPUT_URL = "url";
 
     // Fetch all the input
     public long fileSize;
     public int parts;
     public String bucket;
     public String key;
+    public String url;
 
     // Additional variables
     public File file;
@@ -85,6 +99,9 @@ public class UploadWorker extends Worker {
         String filename = input.getString(INPUT_FILENAME);
         bucket = input.getString(INPUT_BUCKET);
         key = input.getString(INPUT_KEY);
+        url = input.getString(INPUT_URL);
+
+        Log.d(TAG, "url -" + url + "-");
 
         // Retrieve state
         SharedPreferences prefs = getApplicationContext().getSharedPreferences("uploads",Context.MODE_PRIVATE);
@@ -120,90 +137,133 @@ public class UploadWorker extends Worker {
         }
 
         // Start
+        if(url.length() < 5) {
+            // Then, execute the upload
+            final AmazonS3Client s3 = getS3Client();
 
-        // Then, execute the upload
-        final AmazonS3Client s3 = getS3Client();
-
-        // The actual low-level multipart upload is adapted from:
-        // https://docs.aws.amazon.com/AmazonS3/latest/dev/llJavaUploadFile.html
-        try {
-            // Initiate the multipart upload.
-            if(!state.hasUploadId()) {
-                InitiateMultipartUploadRequest initRequest = new InitiateMultipartUploadRequest(bucket, key);
-                InitiateMultipartUploadResult initResponse = s3.initiateMultipartUpload(initRequest);
-                state.saveUploadId(initResponse.getUploadId());
-                logFile("started", state.getUploadId());
-            } else {
-                logFile("resume", "");
-                logChunk("resume", "");
-            }
-
-            // Upload the file parts.
-            while(state.getFilePosition() < fileSize) {
-                if (fileSize > Upload.MOBILE_UPLOAD_LIMIT && !hasWifi()) {
-                    throw new NoWifiException("no wifi available to upload big file");
+            // The actual low-level multipart upload is adapted from:
+            // https://docs.aws.amazon.com/AmazonS3/latest/dev/llJavaUploadFile.html
+            try {
+                // Initiate the multipart upload.
+                if(!state.hasUploadId()) {
+                    InitiateMultipartUploadRequest initRequest = new InitiateMultipartUploadRequest(bucket, key);
+                    InitiateMultipartUploadResult initResponse = s3.initiateMultipartUpload(initRequest);
+                    state.saveUploadId(initResponse.getUploadId());
+                    logFile("started", state.getUploadId());
+                } else {
+                    logFile("resume", "");
+                    logChunk("resume", "");
                 }
 
-                // Because the last part could be less than 5 MB, adjust the part size as needed.
-                long partSize = Math.min(UploadState.PART_SIZE, (fileSize - state.getFilePosition()));
+                // Upload the file parts.
+                while(state.getFilePosition() < fileSize) {
+                    if (fileSize > Upload.MOBILE_UPLOAD_LIMIT && !hasWifi()) {
+                        throw new NoWifiException("no wifi available to upload big file");
+                    }
 
-                // Create the request to upload a part.
-                UploadPartRequest uploadRequest = new UploadPartRequest()
-                        .withBucketName(bucket)
-                        .withKey(key)
-                        .withUploadId(state.getUploadId())
-                        .withPartNumber(state.getPartNumber())
-                        .withFileOffset(state.getFilePosition())
-                        .withFile(file)
-                        .withPartSize(partSize);
+                    // Because the last part could be less than 5 MB, adjust the part size as needed.
+                    long partSize = Math.min(UploadState.PART_SIZE, (fileSize - state.getFilePosition()));
 
-                // Upload the part and add the response's ETag to our list.
-                logChunk("chunk-started","");
-                UploadPartResult uploadResult = s3.uploadPart(uploadRequest);
+                    // Create the request to upload a part.
+                    UploadPartRequest uploadRequest = new UploadPartRequest()
+                            .withBucketName(bucket)
+                            .withKey(key)
+                            .withUploadId(state.getUploadId())
+                            .withPartNumber(state.getPartNumber())
+                            .withFileOffset(state.getFilePosition())
+                            .withFile(file)
+                            .withPartSize(partSize);
 
-                //  Log completion before incrementing the numbers (on saveEtag)
-                logChunk("chunk-completed",uploadResult.getPartETag().getETag());
-                state.saveEtag(uploadResult.getPartETag());
+                    // Upload the part and add the response's ETag to our list.
+                    logChunk("chunk-started","");
+                    UploadPartResult uploadResult = s3.uploadPart(uploadRequest);
+
+                    //  Log completion before incrementing the numbers (on saveEtag)
+                    logChunk("chunk-completed",uploadResult.getPartETag().getETag());
+                    state.saveEtag(uploadResult.getPartETag());
+                }
+
+                // Complete the multipart upload.
+                CompleteMultipartUploadRequest compRequest = new CompleteMultipartUploadRequest(bucket, key,
+                        state.getUploadId(), state.getPartETags());
+                CompleteMultipartUploadResult result = s3.completeMultipartUpload(compRequest);
+
+                // Yes, we did it!
+                logFile("completed", result.getLocation());
+
+                // Delete that stuff
+                file.delete();
+                state.delete();
+
+                // Log warning if file could not be deleted (acceptence test criteria)
+                if (file.exists()) {
+                    logFile("error", "could not delete file");
+                }
+
+                // Let others know we did it (Android EventBus)
+                EventBus.getDefault().post(new UploadResult(getId(), filename, bucket, key ,true));
+                return Result.SUCCESS;
             }
+            catch(AmazonClientException e) {
+                e.printStackTrace();
 
-            // Complete the multipart upload.
-            CompleteMultipartUploadRequest compRequest = new CompleteMultipartUploadRequest(bucket, key,
-                    state.getUploadId(), state.getPartETags());
-            CompleteMultipartUploadResult result = s3.completeMultipartUpload(compRequest);
-
-            // Yes, we did it!
-            logFile("completed", result.getLocation());
-
-            // Delete that stuff
-            file.delete();
-            state.delete();
-
-            // Log warning if file could not be deleted (acceptence test criteria)
-            if (file.exists()) {
-                logFile("error", "could not delete file");
+                // Uh-oh, we failed. Let's try again another time.
+                logFile("warning", e.getMessage());
+                return Result.RETRY;
             }
+            catch(NoWifiException e){
+                e.printStackTrace();
 
-            // Let others know we did it (Android EventBus)
-            EventBus.getDefault().post(new UploadResult(getId(), filename, bucket, key ,true));
-            return Result.SUCCESS;
-        }
-        catch(AmazonClientException e) {
-            e.printStackTrace();
+                // Uh-oh, we failed, let's try again another time.
+                logFile("warning","no wifi to upload big file");
+                return Result.RETRY;
+            }
+            catch(Exception e) {
+                logFile("warning",String.format("unexpected exception: %s", e.getMessage()));
+                return Result.RETRY;
+            }
+        } else {
+            OkHttpClient client = new OkHttpClient();
+            RequestBody requestBody = new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart(
+                            "file",
+                            file.getName(),
+                            RequestBody.create(MediaType.parse("application/zip"), file)
+                    ).build();
 
-            // Uh-oh, we failed. Let's try again another time.
-            logFile("warning", e.getMessage());
-            return Result.RETRY;
-        }
-        catch(NoWifiException e){
-            e.printStackTrace();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(requestBody)
+                    .build();
 
-            // Uh-oh, we failed, let's try again another time.
-            logFile("warning","no wifi to upload big file");
-            return Result.RETRY;
-        }
-        catch(Exception e) {
-            logFile("warning",String.format("unexpected exception: %s", e.getMessage()));
-            return Result.RETRY;
+            try (Response response = client.newCall(request).execute()) {
+                if(!response.isSuccessful())
+                    throw new IOException("Unexpected code " + response);
+
+                String responseString = response.body().string();
+                Log.d(TAG, "API response: " + responseString);
+                EventBus.getDefault().postSticky(responseString);
+//                EventBusUtil.postString(responseString);
+
+                // Move the uploaded file to the uploaded directory.
+                File uploadDirectory = new File(file.getParentFile().getParentFile(), "uploaded");
+                if(!uploadDirectory.exists()) uploadDirectory.mkdirs();
+                File uploadFile = new File(uploadDirectory, file.getName());
+                file.renameTo(uploadFile);
+
+                EventBus.getDefault().post(new UploadResult(getId(), filename, bucket, key ,true));
+
+                return Result.SUCCESS;
+            } catch (IOException e) {
+                Log.d(TAG, "IOException: " + e.getMessage());
+                e.printStackTrace();
+                return Result.RETRY;
+            } catch (NullPointerException e) {
+                Log.d(TAG, "NullPointerException: " + e.getMessage());
+                e.printStackTrace();
+                return Result.RETRY;
+            }
         }
     }
 

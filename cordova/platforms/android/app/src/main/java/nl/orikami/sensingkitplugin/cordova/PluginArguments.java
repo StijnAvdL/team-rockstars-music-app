@@ -13,12 +13,14 @@ public class PluginArguments {
     @SerializedName("s3prefix")
     public String s3Prefix;
     public ArrayList<String> sensors = new ArrayList<String>();
+    public String url;
 
-    public PluginArguments(String id, String s3Bucket, String s3Prefix, ArrayList<String> sensors) {
+    public PluginArguments(String id, String s3Bucket, String s3Prefix, ArrayList<String> sensors, String url) {
         this.id = id;
         this.s3Bucket = s3Bucket;
         this.s3Prefix = s3Prefix;
         this.sensors = sensors;
+        this.url = url;
     }
 
     @Override
@@ -28,6 +30,7 @@ public class PluginArguments {
                 ", s3Bucket='" + s3Bucket + '\'' +
                 ", s3Prefix='" + s3Prefix + '\'' +
                 ", sensors='" + sensors + '\'' +
+                ", url='" + url + '\'' +
                 '}';
     }
 }
