@@ -255,6 +255,7 @@ public class SensingKitService extends Service {
             sensingManager.close();
         }
 
+        // TODO make variable to turn remove on and off
         ZipUtil.zipAndRemoveSensingData(this, experimentId, s3Prefix);
 
         try {

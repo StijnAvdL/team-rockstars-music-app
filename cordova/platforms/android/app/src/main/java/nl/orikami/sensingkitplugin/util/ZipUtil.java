@@ -42,8 +42,9 @@ public class ZipUtil {
             File directory = FileUtil.getExperimentDirectory(experimentId);
             ZipUtil.zipDirectory(context, directory, zipFile);
 
+            // TODO make variable to turn remove on and off
             // Remove the raw data that was just zipped
-            FileUtil.removeExperimentDirectory(experimentId);
+            // FileUtil.removeExperimentDirectory(experimentId);
         } catch (SKException e) {
             e.printStackTrace();
         }
