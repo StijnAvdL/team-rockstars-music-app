@@ -26,7 +26,7 @@ function Menu(props) {
             onClick: () => { go("/"); MenuModel.close() }
         },
         {
-            title: "Tug",
+            title: "TUG",
             icon: <WalkingIcon />,
             onClick: () => { go("/tug"); MenuModel.close() }
         },
