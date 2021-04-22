@@ -4,6 +4,9 @@ import { useObserver } from "mobx-react";
 import { AppBar } from "@orikami-nl/orikami-components";
 import Sdmt from "@orikami-nl/sdmt-frontend";
 import Tug from "@orikami-nl/tug-frontend";
+import Info from "/src/components/Info";
+
+import HelpIcon from '@material-ui/icons/HelpOutline';
 
 import Home from "/src/viewmodels/Home";
 import Menu from "/src/components/Menu";
@@ -22,7 +25,12 @@ const timeline = new Timeline();
 function Router(props) {
   const { page, go } = props;
   var content = null;
-  var appBar = <AppBar leftType="menu" title="MM Fit" leftAction={MenuModel.toggle} />;
+  var appBar = <AppBar
+    leftType="menu"
+    title="MM Fit"
+    leftAction={MenuModel.toggle}
+    rightAction={() => { go("/info") }}
+    rightIcon={<HelpIcon />} />;
 
   switch (page) {
     case "/":
@@ -30,10 +38,13 @@ function Router(props) {
         <Home go={go} timeline={timeline} />
       );
       break;
-    case "/walking":
-      content = (
-        <p>Walking</p>
-      );
+    case "/info":
+      appBar = <AppBar
+        leftType="menu"
+        title="MM Fit"
+        leftAction={() => go("/")}
+        leftType={"back"} />;
+      content = <Info />;
       break;
     case "/cognition":
       content = (
