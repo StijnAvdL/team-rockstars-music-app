@@ -42,7 +42,7 @@
     "@material-ui/icons": "^4.9.1",
     "@orikami-nl/orikami-components": "^0.1.48",
     "@orikami-nl/sdmt-frontend": "file:../sdmt-frontend",
-    "@orikami-nl/tug-frontend": "^0.1.5",
+    "@orikami-nl/tug-frontend": "^0.1.6",
     "cordova": "^9.0.0",
     "dotenv-webpack": "^1.7.0",
     "mobx": "^5.15.6",
