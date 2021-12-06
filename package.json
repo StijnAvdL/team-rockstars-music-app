@@ -1,5 +1,5 @@
 {
-  "name": "janssen-demo-app",
+  "name": "team-rockstars-music-app",
   "version": "0.0.1",
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
@@ -40,18 +40,13 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
-    "@orikami-nl/orikami-components": "^0.1.48",
-    "@orikami-nl/sdmt-frontend": "file:../sdmt-frontend",
-    "@orikami-nl/tug-frontend": "^0.1.6",
     "cordova": "^9.0.0",
     "dotenv-webpack": "^1.7.0",
     "mobx": "^5.15.6",
     "mobx-react": "^6.2.5",
-    "moment": "^2.27.0",
     "prop-types": "^15.5.10",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-swipeable-views": "^0.12.13"
+    "react-dom": "^16.13.1"
   },
   "private": true
 }
