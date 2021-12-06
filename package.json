@@ -4,7 +4,7 @@
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
     "build": "node ./node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production ./node_modules/webpack/bin/webpack.js --mode=production --config webpack.config.js  --target web",
-    "cordova": "node ./node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development ./node_modules/webpack/bin/webpack.js --mode=development --config webpack.config.js --env.STAGE=staging && cd cordova && cordova prepare && cd .."
+    "cordova": "node ./node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production ./node_modules/webpack/bin/webpack.js --mode=production --config webpack.config.js --env.STAGE=staging && cd cordova && cordova prepare && cd .."
   },
   "devDependencies": {
     "babel": "^6.x.x",

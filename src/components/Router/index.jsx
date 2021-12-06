@@ -11,10 +11,8 @@ function Router(props) {
   const { page, go } = props
   var content = null
 
-  console.log('now here!', page)
   switch (page) {
     case '/':
-      console.log('this case!')
       content = <div>Home</div>
       break
     case '/error':
