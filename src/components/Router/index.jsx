@@ -23,7 +23,7 @@ function Router(props) {
   switch (page) {
     case '/':
       title = 'Artists'
-      content = <Artists artists={artistsModel.artists} go={go} />
+      content = <Artists go={go} model={artistsModel} artists={artistsModel.artists} />
       break
     case '/artist':
       artistsModel.getSongs(params.artist)
