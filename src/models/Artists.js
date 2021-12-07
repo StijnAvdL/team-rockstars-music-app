@@ -6,6 +6,7 @@ class Artists {
     @observable songs = []
     @observable init = true;
     @observable initSongs = false;
+    @observable error = null;
 
     constructor() {
         this._onReceive();
@@ -18,10 +19,16 @@ class Artists {
             .then(data => {
                 this.artists = data
                 this.init = false;
+            })
+            .catch(error => {
+                console.log("error!", error)
+                this.init = false;
+                this.error = "Server is not available right now";
             });
     }
 
     getSongs(artist) {
+        this.error = null;
         this.initSongs = true;
         this.songs = []
         fetch(`http://localhost:3000/songs?artist=${artist}`)
@@ -33,7 +40,8 @@ class Artists {
     }
 
     searchArtists(value) {
-        this.songs = []
+        this.error = null;
+        this.songs = [];
         this.init = true;
         fetch(`http://localhost:3000/artists?name_like=${value}`)
             .then(res => res.json())

@@ -4,6 +4,7 @@ import RouterModel from '/src/models/Router'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import Artists from '/src/models/Artists'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Popover from '/src/components/Popover'
 
 const theme = createMuiTheme({
   palette: {
@@ -26,6 +27,7 @@ const artistsModel = new Artists()
 function App(props) {
   return useObserver(() => (
     <ThemeProvider theme={theme}>
+      {artistsModel.error ? <Popover error={artistsModel.error} /> : null}
       {artistsModel.init ? (
         <CircularProgress />
       ) : (

@@ -7,7 +7,7 @@ import Playlists from '/src/viewmodels/Playlists'
 import AppBar from '/src/components/AppBar'
 import Menu from '/src/components/Menu'
 import MenuModel from '/src/models/Menu'
-import CircularProgress from '@material-ui/core/CircularProgress'
+import Typography from '@material-ui/core/Typography'
 
 const propTypesView = {
   page: PropTypes.string,
@@ -35,7 +35,7 @@ function Router(props) {
       content = <Playlists />
       break
     default:
-      content = <p>Wrong adress</p>
+      content = <Typography>Page doesn't exists, use the menu to go back</Typography>
       break
   }
 
