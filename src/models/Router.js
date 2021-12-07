@@ -1,4 +1,5 @@
-import { observable, action } from "mobx";
+import { observable, action } from 'mobx'
+import querystring from "qs";
 
 class Router {
   @observable page = "/";
@@ -6,8 +7,13 @@ class Router {
 
   @action.bound
   go(page, params) {
-    this.params = params;
-    this.page = page;
+    console.log("page, params", page, params)
+    if (page && page.split('?').length > 1) {
+      params = querystring.parse(page.split("?")[1] || "")
+      page = page.match(/\/?([^?]*)/)[0]
+    }
+    this.page = page
+    this.params = params
   }
 }
-export default Router;
+export default Router

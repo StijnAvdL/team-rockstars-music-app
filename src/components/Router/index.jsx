@@ -2,10 +2,12 @@ import PropTypes from 'prop-types'
 import { useObserver } from 'mobx-react'
 
 import Artists from '/src/viewmodels/Artists'
+import Artist from '/src/viewmodels/Artist'
 import Playlists from '/src/viewmodels/Playlists'
 import AppBar from '/src/components/AppBar'
 import Menu from '/src/components/Menu'
 import MenuModel from '/src/models/Menu'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 const propTypesView = {
   page: PropTypes.string,
@@ -14,21 +16,26 @@ const propTypesView = {
 }
 
 function Router(props) {
-  const { page, go, artistsModel } = props
+  const { page, go, artistsModel, params } = props
   var content = null
   var title = null
 
   switch (page) {
     case '/':
       title = 'Artists'
-      content = <Artists artists={artistsModel.artists} />
+      content = <Artists artists={artistsModel.artists} go={go} />
+      break
+    case '/artist':
+      artistsModel.getSongs(params.artist)
+      title = params.artist
+      content = <Artist model={artistsModel} />
       break
     case '/playlists':
       title = 'Playlists'
       content = <Playlists />
       break
     default:
-      content = <p>Error</p>
+      content = <p>Wrong adress</p>
       break
   }
 

@@ -5,7 +5,7 @@ import Artists from '/src/components/Artists'
 
 const propTypes = {
   go: PropTypes.func,
-  timeline: PropTypes.object,
+  artists: PropTypes.object,
 }
 
 class ArtistsViewModel extends React.Component {
@@ -14,8 +14,8 @@ class ArtistsViewModel extends React.Component {
   }
 
   render() {
-    const { artists } = this.props
-    return <Artists artists={artists} />
+    const { artists, go } = this.props
+    return <Artists artists={artists} go={go} />
   }
 }
 

@@ -9,8 +9,8 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 
-import HomeIcon from '@material-ui/icons/Home'
-import WalkingIcon from '@material-ui/icons/DirectionsWalk'
+import PersonIcon from '@material-ui/icons/Person'
+import QueueMusicIcon from '@material-ui/icons/QueueMusic'
 
 const propTypes = {
   go: PropTypes.func,
@@ -21,7 +21,7 @@ function Menu(props) {
   const menuItems = [
     {
       title: 'Artists',
-      icon: <HomeIcon />,
+      icon: <PersonIcon />,
       onClick: () => {
         go('/')
         MenuModel.close()
@@ -29,7 +29,7 @@ function Menu(props) {
     },
     {
       title: 'Playlists',
-      icon: <WalkingIcon />,
+      icon: <QueueMusicIcon />,
       onClick: () => {
         go('/playlists')
         MenuModel.close()

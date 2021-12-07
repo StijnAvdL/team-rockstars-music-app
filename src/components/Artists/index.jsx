@@ -10,13 +10,13 @@ import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 
 function Artists(props) {
-  const { artists = [] } = props
+  const { artists = [], go } = props
   return useObserver(() => (
     <TableContainer component={Paper}>
       <Table aria-label="simple table">
         <TableBody>
           {artists.map((artist) => (
-            <TableRow key={artist.name}>
+            <TableRow key={artist.name} onClick={() => go(`/artist?artist=${artist.name}`)}>
               <TableCell component="th" scope="row">
                 {artist.name}
               </TableCell>
