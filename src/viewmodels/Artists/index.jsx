@@ -14,7 +14,8 @@ class ArtistsViewModel extends React.Component {
   }
 
   render() {
-    return <Artists />
+    const { artists } = this.props
+    return <Artists artists={artists} />
   }
 }
 

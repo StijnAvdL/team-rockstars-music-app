@@ -14,14 +14,14 @@ const propTypesView = {
 }
 
 function Router(props) {
-  const { page, go } = props
+  const { page, go, artistsModel } = props
   var content = null
   var title = null
 
   switch (page) {
     case '/':
       title = 'Artists'
-      content = <Artists />
+      content = <Artists artists={artistsModel.artists} />
       break
     case '/playlists':
       title = 'Playlists'
