@@ -1,6 +1,12 @@
 import PropTypes from 'prop-types'
 import { useObserver } from 'mobx-react'
 
+import Artists from '/src/viewmodels/Artists'
+import Playlists from '/src/viewmodels/Playlists'
+import AppBar from '/src/components/AppBar'
+import Menu from '/src/components/Menu'
+import MenuModel from '/src/models/Menu'
+
 const propTypesView = {
   page: PropTypes.string,
   go: PropTypes.func,
@@ -10,17 +16,29 @@ const propTypesView = {
 function Router(props) {
   const { page, go } = props
   var content = null
+  var title = null
 
   switch (page) {
     case '/':
-      content = <div>Home</div>
+      title = 'Artists'
+      content = <Artists />
       break
-    case '/error':
+    case '/playlists':
+      title = 'Playlists'
+      content = <Playlists />
+      break
+    default:
       content = <p>Error</p>
       break
   }
 
-  return useObserver(() => <div>{content}</div>)
+  return useObserver(() => (
+    <div>
+      <AppBar title={title} menuAction={MenuModel.toggle} />
+      <Menu go={go} />
+      {content}
+    </div>
+  ))
 }
 
 Router.propTypes = propTypesView
