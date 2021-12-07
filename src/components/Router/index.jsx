@@ -13,10 +13,12 @@ const propTypesView = {
   page: PropTypes.string,
   go: PropTypes.func,
   params: PropTypes.object,
+  artistsModel: PropTypes.object,
+  playlistsModel: PropTypes.object,
 }
 
 function Router(props) {
-  const { page, go, artistsModel, params } = props
+  const { page, go, artistsModel, playlistsModel, params } = props
   var content = null
   var title = null
 
@@ -32,7 +34,7 @@ function Router(props) {
       break
     case '/playlists':
       title = 'Playlists'
-      content = <Playlists />
+      content = <Playlists playlistsModel={playlistsModel} />
       break
     default:
       content = <Typography>Page doesn't exists, use the menu to go back</Typography>

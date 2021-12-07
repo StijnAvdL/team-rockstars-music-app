@@ -1,8 +1,8 @@
 import { observable, action } from "mobx";
 import regeneratorRuntime from "regenerator-runtime"; // TODO: receive error without this import
 
-class Artists {
-    @observable artists = []
+class Playlists {
+    @observable playlists = []
     @observable songs = []
     @observable init = true;
     @observable initSongs = false;
@@ -14,10 +14,10 @@ class Artists {
 
     async _onReceive() {
         this.init = true;
-        await fetch("http://localhost:3000/artists")
+        await fetch("http://localhost:3000/playlists")
             .then(res => res.json())
             .then(data => {
-                this.artists = data
+                this.playlists = data
                 this.init = false;
             })
             .catch(error => {
@@ -27,29 +27,22 @@ class Artists {
             });
     }
 
-    getSongs(artist) {
-        this.error = null;
-        this.initSongs = true;
-        this.songs = []
-        fetch(`http://localhost:3000/songs?artist=${artist}`)
-            .then(res => res.json())
-            .then(data => {
-                this.songs = data
-                this.initSongs = false;
-            });
-    }
-
-    searchArtists(value) {
-        this.error = null;
-        this.songs = [];
+    add(name) {
         this.init = true;
-        fetch(`http://localhost:3000/artists?name_like=${value}`)
+        const playlist = { name: name, songs: [] }
+        fetch("http://localhost:3000/playlists", {
+            method: "POST",
+            body: JSON.stringify(playlist),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then(res => res.json())
             .then(data => {
-                this.artists = data
+                this.playlists.push(data)
                 this.init = false;
             });
-    }
 
+    }
 }
-export default Artists
+export default Playlists

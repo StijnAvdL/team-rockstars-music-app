@@ -3,6 +3,7 @@ import Router from '/src/components/Router'
 import RouterModel from '/src/models/Router'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import Artists from '/src/models/Artists'
+import Playlists from '/src/models/Playlists'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Popover from '/src/components/Popover'
 
@@ -23,6 +24,7 @@ const theme = createMuiTheme({
 const router = new RouterModel()
 
 const artistsModel = new Artists()
+const playlistsModel = new Playlists()
 
 function App(props) {
   return useObserver(() => (
@@ -31,7 +33,13 @@ function App(props) {
       {artistsModel.init ? (
         <CircularProgress />
       ) : (
-        <Router page={router.page} params={router.params} go={router.go} artistsModel={artistsModel} />
+        <Router
+          page={router.page}
+          params={router.params}
+          go={router.go}
+          artistsModel={artistsModel}
+          playlistsModel={playlistsModel}
+        />
       )}
     </ThemeProvider>
   ))

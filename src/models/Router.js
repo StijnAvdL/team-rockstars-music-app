@@ -7,7 +7,6 @@ class Router {
 
   @action.bound
   go(page, params) {
-    console.log("page, params", page, params)
     if (page && page.split('?').length > 1) {
       params = querystring.parse(page.split("?")[1] || "")
       page = page.match(/\/?([^?]*)/)[0]
