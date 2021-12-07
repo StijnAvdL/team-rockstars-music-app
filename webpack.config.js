@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const dotenv = require("dotenv-webpack");
+// const dotenv = require("dotenv-webpack");
 
 var argv = require("minimist")(process.argv.slice(2));
 const isWeb = argv && argv.target === "web";
@@ -49,7 +49,7 @@ module.exports = {
     }),
     new HtmlWebPackPlugin({ template: "./src/index.html" }),
     new webpack.HotModuleReplacementPlugin(),
-    new dotenv({ path: "./.env-" + envFile })
+    // new dotenv({ path: "./.env-" + envFile })
   ],
   devServer: {
     historyApiFallback: true,

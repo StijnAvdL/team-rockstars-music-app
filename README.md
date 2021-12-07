@@ -1,8 +1,8 @@
 # Team Rockstars Music app
 
-The Team Eockstars Music app project.
+The Team Rockstars Music app project.
 
-### Install
+## Requirements
 
 Requirements:
 
@@ -19,6 +19,11 @@ npm install
 
 ```
 npm run start
+```
+
+**Run the server local on port 3000**
+```
+json-server .\server\db.json
 ```
 
 **Update code cordova**
